@@ -217,7 +217,83 @@ aplicarTema.addEventListener('click',aplicarPaleta);
 const temaSalvo=JSON.parse(localStorage.getItem('tema'));
 if(temaSalvo){
   corPrimaria.value=temaSalvo.primary;
-  corSecundaria.value=temaSalvo.secondary;
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso de Administração - Moderno e Personalizável</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header text-center">
+  <h1 class="titulo">Curso de Administração</h1>
+  <p class="subtitulo">Explore objetivos, história, trabalhos e interaja com outros alunos.</p>
+  <div id="loginDiv" class="login-div mt-4 flex justify-center gap-2">
+    <input id="senhaInput" type="password" placeholder="Senha do administrador" class="input-senha">
+    <button id="entrarBtn" class="btn-primary">Entrar</button>
+  </div>
+  <button id="btnIrLogin" class="btn-terciario mt-2">Ir para Área de Login</button>
+  <div id="temaDiv" class="tema-div mt-4 flex justify-center gap-2 flex-wrap">
+    <label class="flex flex-col items-center">
+      Cor Primária
+      <input type="color" id="corPrimaria" value="#5b21b6" class="color-picker">
+    </label>
+    <label class="flex flex-col items-center">
+      Cor Secundária
+      <input type="color" id="corSecundaria" value="#7c3aed" class="color-picker">
+    </label>
+    <label class="flex flex-col items-center">
+      Cor de Destaque
+      <input type="color" id="corAccent" value="#c4b5fd" class="color-picker">
+    </label>
+    <button id="aplicarTema" class="btn-primary">Aplicar Tema</button>
+  </div>
+</header>
+
+<div id="editControls" class="flex justify-center gap-2 mb-4 hidden">
+  <button id="desfazerBtn" class="btn-secundario">Desfazer Alteração</button>
+</div>
+
+<div class="flex justify-center gap-4 mb-6 flex-wrap">
+  <button class="sectionBtn btn-primary" data-section="objetivos">Objetivos</button>
+  <button class="sectionBtn btn-secundario" data-section="historia">História</button>
+  <button class="sectionBtn btn-secundario" data-section="trabalhos">Trabalhos</button>
+</div>
+
+<div id="editBanner" class="hidden edit-banner">Modo de edição ativo</div>
+
+<div id="cardContainer" class="card-container max-w-4xl mx-auto">
+  <div class="flex justify-between items-center mb-4">
+    <h2 id="tituloSecao" class="titulo-secao"></h2>
+    <button id="editarBtn" class="hidden btn-editar">Editar</button>
+  </div>
+  <div id="imagensContainer" class="imagens-container flex flex-col items-center gap-3 mb-4"></div>
+  <div id="uploadDiv" class="hidden mb-4">
+    <label class="mb-2">Adicionar imagens:</label>
+    <input type="file" id="inputImagens" accept="image/*" multiple>
+  </div>
+  <textarea id="textoSecao" class="hidden"></textarea>
+  <p id="textoView" class="texto-view"></p>
+</div>
+
+<!-- Bate-papo moderno -->
+<div class="chat-container max-w-4xl mx-auto mt-10">
+  <h3 class="chat-titulo">Comentários</h3>
+  <div id="comentariosList" class="comentarios-list"></div>
+  <input id="nomeUsuario" type="text" placeholder="Seu nome" class="input-nome">
+  <textarea id="textoComentario" placeholder="Escreva um comentário..." class="textarea-comentario"></textarea>
+  <button id="enviarComentario" class="btn-primary">Enviar Comentário</button>
+</div>
+
+<footer class="footer mt-16 text-center">
+  <p>© <span id="anoAtual"></span> Curso de Administração — Todos os direitos reservados.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
   corAccent.value=temaSalvo.accent;
   aplicarPaleta();
 }

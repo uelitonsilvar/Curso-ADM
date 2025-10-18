@@ -7,17 +7,80 @@
 }
 
 body {
+  background: linear-gradient(to bottom, var(--accent)/30, #fff);
+  color: var(--text-dark);
   transition: background-color 0.3s, color 0.3s;
+  padding: 1rem;
+  font-family: sans-serif;
 }
 
-#comentariosList::-webkit-scrollbar {
-  width: 8px;
+.header .titulo { font-size: 3rem; font-weight: bold; color: var(--primary); }
+.header .subtitulo { color: var(--text-dark)/70; }
+
+.input-senha, .input-nome, .color-picker, .textarea-comentario, #textoSecao {
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  width: 100%;
+  font-size: 1rem;
 }
-#comentariosList::-webkit-scrollbar-thumb {
-  background-color: var(--secondary);
-  border-radius: 4px;
+
+.btn-primary {
+  background-color: var(--primary);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
 }
-#comentariosList::-webkit-scrollbar-track {
-  background-color: #e5e7eb;
-  border-radius: 4px;
+
+.btn-primary:hover { background-color: var(--secondary); }
+
+.btn-secundario {
+  background-color: #f3f4f6;
+  color: var(--primary);
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--primary);
+  border-radius: 0.5rem;
+  cursor: pointer;
 }
+
+.btn-secundario:hover {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.card-container {
+  background-color: var(--bg-card);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: opacity 0.3s;
+}
+
+.edit-banner {
+  background-color: #FEF3C7;
+  color: #92400E;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+}
+
+.comentarios-list {
+  max-height: 18rem;
+  overflow-y: auto;
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem;
+  background: #f9fafb;
+  border-radius: 0.5rem;
+}
+
+.comentarios-list::-webkit-scrollbar { width: 8px; }
+.comentarios-list::-webkit-scrollbar-thumb { background-color: var(--secondary); border-radius: 4px; }
+.comentarios-list::-webkit-scrollbar-track { background-color: #e5e7eb; border-radius: 4px; }
+
+.chat-container { background: #fff; padding: 1rem; border-radius: 1rem; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+.chat-titulo { font-size: 1.5rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem; }
+
+.highlight { animation: highlightAnim 1s ease; }
+@keyframes highlightAnim { 0% { background-color: yellow; } 100% { background-color: transparent; } }
