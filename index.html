@@ -3,41 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Curso de Administração - Moderno e Personalizável</title>
-<link rel="stylesheet" href="style.css">
+<title>Curso de Administração</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/framer-motion/dist/framer-motion.umd.js"></script>
+<style>
+  :root {
+    --primary: #5b21b6;
+    --secondary: #7c3aed;
+    --accent: #c4b5fd;
+    --bg-card: #f3f4f6;
+    --text-dark: #1f2937;
+  }
+  body { transition: background-color 0.3s, color 0.3s; scroll-behavior: smooth; }
+  #comentariosList::-webkit-scrollbar { width: 8px; }
+  #comentariosList::-webkit-scrollbar-thumb { background-color: var(--secondary); border-radius: 4px; }
+  #comentariosList::-webkit-scrollbar-track { background-color: #e5e7eb; border-radius: 4px; }
+</style>
 </head>
 <body class="bg-gradient-to-b from-accent/30 to-white min-h-screen text-text-dark p-4 transition-colors">
 
-<header class="text-center mb-10">
+<header class="text-center mb-10 relative">
   <h1 class="text-5xl font-bold mb-2 text-primary">Curso de Administração</h1>
-  <p class="text-text-dark/70">Explore objetivos, história, trabalhos e interaja com outros alunos.</p>
-  <div id="loginDiv" class="mt-4 flex justify-center gap-2">
-    <input id="senhaInput" type="password" placeholder="Senha do administrador" class="border rounded px-3 py-2 w-60">
-    <button id="entrarBtn" class="bg-primary text-white px-5 py-2 rounded hover:bg-secondary transition">Entrar</button>
-  </div>
-  <div id="temaDiv" class="mt-4 flex justify-center gap-2 flex-wrap">
-    <label class="flex flex-col items-center">
-      Cor Primária
-      <input type="color" id="corPrimaria" value="#5b21b6" class="w-12 h-8 border rounded">
-    </label>
-    <label class="flex flex-col items-center">
-      Cor Secundária
-      <input type="color" id="corSecundaria" value="#7c3aed" class="w-12 h-8 border rounded">
-    </label>
-    <label class="flex flex-col items-center">
-      Cor de Destaque
-      <input type="color" id="corAccent" value="#c4b5fd" class="w-12 h-8 border rounded">
-    </label>
-    <button id="aplicarTema" class="bg-primary text-white px-4 py-2 rounded hover:bg-secondary transition">Aplicar Tema</button>
-  </div>
+  <p class="text-text-dark/70 max-w-2xl mx-auto">Explore objetivos, história, trabalhos e interaja com outros alunos.</p>
+  <!-- Logout admin -->
+  <button id="logoutBtn" class="absolute top-0 right-0 mt-4 mr-4 px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600 transition hidden">Logout</button>
 </header>
 
-<div id="editControls" class="flex justify-center gap-2 mb-4 hidden">
-  <button id="desfazerBtn" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 transition">Desfazer Alteração</button>
+<!-- Tema personalizável -->
+<div id="temaDiv" class="mt-4 flex justify-center gap-2 flex-wrap">
+  <label class="flex flex-col items-center">
+    Cor Primária
+    <input type="color" id="corPrimaria" value="#5b21b6" class="w-12 h-8 border rounded">
+  </label>
+  <label class="flex flex-col items-center">
+    Cor Secundária
+    <input type="color" id="corSecundaria" value="#7c3aed" class="w-12 h-8 border rounded">
+  </label>
+  <label class="flex flex-col items-center">
+    Cor de Destaque
+    <input type="color" id="corAccent" value="#c4b5fd" class="w-12 h-8 border rounded">
+  </label>
+  <button id="aplicarTema" class="bg-primary text-white px-4 py-2 rounded hover:bg-secondary transition">Aplicar Tema</button>
 </div>
 
-<div class="flex justify-center gap-4 mb-6 flex-wrap">
+<!-- Seções do curso -->
+<div class="flex justify-center gap-4 mb-6 flex-wrap mt-6">
   <button class="sectionBtn px-5 py-2 rounded bg-primary text-white shadow" data-section="objetivos">Objetivos</button>
   <button class="sectionBtn px-5 py-2 rounded border border-primary text-primary shadow" data-section="historia">História</button>
   <button class="sectionBtn px-5 py-2 rounded border border-primary text-primary shadow" data-section="trabalhos">Trabalhos</button>
@@ -45,7 +55,7 @@
 
 <div id="editBanner" class="hidden text-center bg-yellow-100 text-yellow-800 py-2 rounded mb-4 font-medium">Modo de edição ativo</div>
 
-<div id="cardContainer" class="max-w-4xl mx-auto bg-bg-card shadow-xl rounded-xl p-6 transition-opacity duration-500">
+<div id="cardContainer" class="max-w-4xl mx-auto bg-bg-card shadow-2xl rounded-2xl p-6 transition-opacity duration-500">
   <div class="flex justify-between items-center mb-4">
     <h2 id="tituloSecao" class="text-3xl text-primary font-bold"></h2>
     <button id="editarBtn" class="hidden bg-white border border-primary text-primary px-4 py-2 rounded shadow hover:bg-primary hover:text-white transition">Editar</button>
@@ -59,7 +69,8 @@
   <p id="textoView" class="text-lg leading-relaxed"></p>
 </div>
 
-<div class="max-w-4xl mx-auto mt-10 bg-white shadow-xl rounded-xl p-6">
+<!-- Bate-papo moderno -->
+<div class="max-w-4xl mx-auto mt-10 bg-white shadow-2xl rounded-2xl p-6">
   <h3 class="text-2xl font-semibold text-primary mb-4">Comentários</h3>
   <div id="comentariosList" class="flex flex-col gap-3 mb-4 max-h-72 overflow-y-auto border border-gray-200 rounded p-3 bg-gray-50"></div>
   <input id="nomeUsuario" type="text" placeholder="Seu nome" class="w-full border rounded px-3 py-2 mb-2">
@@ -71,6 +82,148 @@
   <p>© <span id="anoAtual"></span> Curso de Administração — Todos os direitos reservados.</p>
 </footer>
 
-<script src="script.js"></script>
+<script>
+const anoAtual=document.getElementById('anoAtual'); anoAtual.innerText=new Date().getFullYear();
+
+// Autenticação
+let autenticado = localStorage.getItem('adminAutenticado') === 'true';
+let editando = autenticado;
+const logoutBtn = document.getElementById('logoutBtn');
+const editarBtn = document.getElementById('editarBtn');
+const editControls = document.getElementById('editControls');
+
+if(autenticado){
+  logoutBtn.classList.remove('hidden');
+  editarBtn.classList.remove('hidden');
+}
+
+// Logout
+logoutBtn.addEventListener('click', ()=>{
+  localStorage.removeItem('adminAutenticado');
+  autenticado=false;
+  editando=false;
+  logoutBtn.classList.add('hidden');
+  editarBtn.classList.add('hidden');
+  renderSection();
+});
+
+// Conteúdo do curso
+let section='objetivos';
+let historico=[];
+let imagemAtual=0;
+
+const conteudo={
+  objetivos:{titulo:'Objetivos do Curso', texto:'O curso de Administração forma profissionais capazes de planejar, organizar, dirigir e controlar recursos humanos, financeiros e materiais, promovendo eficiência e inovação.', imagens:[]},
+  historia:{titulo:'História do Curso', texto:'Criado em 1970, o curso de Administração surgiu para atender à demanda por gestores qualificados.', imagens:[]},
+  trabalhos:{titulo:'Trabalhos e Projetos', texto:'Os alunos participam de projetos práticos, estágios e atividades de extensão, desenvolvendo competências em liderança, empreendedorismo e gestão estratégica.', imagens:[]}
+};
+
+// Elementos
+const tituloSecao=document.getElementById('tituloSecao');
+const textoView=document.getElementById('textoView');
+const textoSecao=document.getElementById('textoSecao');
+const imagensContainer=document.getElementById('imagensContainer');
+const uploadDiv=document.getElementById('uploadDiv');
+const inputImagens=document.getElementById('inputImagens');
+const sectionBtns=document.querySelectorAll('.sectionBtn');
+const desfazerBtn=document.getElementById('desfazerBtn');
+
+// Renderização de seção
+function salvarHistorico(){ historico.push(JSON.parse(JSON.stringify(conteudo))); }
+function renderSection(){
+  tituloSecao.innerText=conteudo[section].titulo;
+  textoView.innerText=conteudo[section].texto;
+  textoSecao.value=conteudo[section].texto;
+  imagensContainer.innerHTML='';
+  if(conteudo[section].imagens.length>0){
+    const imgDiv=document.createElement('div');
+    imgDiv.className='relative w-full flex items-center justify-center mb-2';
+    imgDiv.innerHTML=`<img src="${conteudo[section].imagens[imagemAtual]}" class="rounded-2xl shadow-xl max-h-64 object-cover w-full">`;
+    imagensContainer.appendChild(imgDiv);
+  }
+  if(editando){ textoSecao.classList.remove('hidden'); textoView.classList.add('hidden'); uploadDiv.classList.remove('hidden'); editarBtn.innerText='Salvar'; document.getElementById('editBanner').classList.remove('hidden'); }
+  else{ textoSecao.classList.add('hidden'); textoView.classList.remove('hidden'); uploadDiv.classList.add('hidden'); editarBtn.innerText='Editar'; document.getElementById('editBanner').classList.add('hidden'); }
+  sectionBtns.forEach(btn=>{
+    if(btn.dataset.section===section){ btn.classList.add('bg-primary','text-white'); btn.classList.remove('border','text-primary'); }
+    else{ btn.classList.remove('bg-primary','text-white'); btn.classList.add('border','text-primary'); }
+  });
+}
+sectionBtns.forEach(btn=>btn.addEventListener('click',()=>{ section=btn.dataset.section; renderSection(); }));
+
+editarBtn.addEventListener('click',()=>{
+  if(editando){ salvarHistorico(); conteudo[section].texto=textoSecao.value; editando=false; }
+  else editando=true;
+  renderSection();
+});
+desfazerBtn.addEventListener('click',()=>{
+  if(historico.length>0){ const ultimo=historico.pop(); Object.assign(conteudo,ultimo); renderSection(); }
+  else alert('Nenhuma alteração para desfazer.');
+});
+
+// Upload imagens
+inputImagens.addEventListener('change', e=>{
+  Array.from(e.target.files).forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      salvarHistorico();
+      conteudo[section].imagens.push(ev.target.result);
+      renderSection();
+    };
+    reader.readAsDataURL(file);
+  });
+  inputImagens.value='';
+});
+
+// Comentários
+const comentariosList=document.getElementById('comentariosList');
+const nomeUsuario=document.getElementById('nomeUsuario');
+const textoComentario=document.getElementById('textoComentario');
+const enviarComentario=document.getElementById('enviarComentario');
+
+function carregarComentarios(){
+  comentariosList.innerHTML='';
+  const comentarios=JSON.parse(localStorage.getItem('comentarios'))||[];
+  comentarios.forEach(c=>{
+    const div=document.createElement('div');
+    div.className='flex items-start gap-2 bg-accent/40 p-2 rounded shadow';
+    div.innerHTML=`<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold">${c.nome[0].toUpperCase()}</div>
+    <div><strong>${c.nome}</strong> <span class="text-gray-600 text-xs ml-2">${c.data}</span><p>${c.texto}</p></div>`;
+    comentariosList.appendChild(div);
+  });
+}
+enviarComentario.addEventListener('click',()=>{
+  const nome=nomeUsuario.value.trim(), texto=textoComentario.value.trim();
+  if(!nome||!texto){ alert('Preencha nome e comentário.'); return; }
+  const comentarios=JSON.parse(localStorage.getItem('comentarios'))||[];
+  comentarios.push({nome,texto,data:new Date().toLocaleString()});
+  localStorage.setItem('comentarios',JSON.stringify(comentarios));
+  nomeUsuario.value=''; textoComentario.value='';
+  carregarComentarios();
+});
+
+// Tema
+const corPrimaria=document.getElementById('corPrimaria');
+const corSecundaria=document.getElementById('corSecundaria');
+const corAccent=document.getElementById('corAccent');
+const aplicarTema=document.getElementById('aplicarTema');
+function aplicarPaleta(){
+  document.documentElement.style.setProperty('--primary',corPrimaria.value);
+  document.documentElement.style.setProperty('--secondary',corSecundaria.value);
+  document.documentElement.style.setProperty('--accent',corAccent.value);
+  localStorage.setItem('tema',JSON.stringify({primary:corPrimaria.value, secondary:corSecundaria.value, accent:corAccent.value}));
+}
+aplicarTema.addEventListener('click',aplicarPaleta);
+
+const temaSalvo=JSON.parse(localStorage.getItem('tema'));
+if(temaSalvo){
+  corPrimaria.value=temaSalvo.primary;
+  corSecundaria.value=temaSalvo.secondary;
+  corAccent.value=temaSalvo.accent;
+  aplicarPaleta();
+}
+
+carregarComentarios();
+renderSection();
+</script>
 </body>
 </html>
