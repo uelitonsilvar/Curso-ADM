@@ -1,0 +1,23 @@
+:root {
+  --primary: #5b21b6;
+  --secondary: #7c3aed;
+  --accent: #c4b5fd;
+  --bg-card: #f3f4f6;
+  --text-dark: #1f2937;
+}
+
+body {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#comentariosList::-webkit-scrollbar {
+  width: 8px;
+}
+#comentariosList::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 4px;
+}
+#comentariosList::-webkit-scrollbar-track {
+  background-color: #e5e7eb;
+  border-radius: 4px;
+}
